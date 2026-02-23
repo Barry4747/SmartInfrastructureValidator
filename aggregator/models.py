@@ -5,6 +5,7 @@ from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import declarative_base, relationship
 from geoalchemy2 import Geometry
 import enum
+from database import Base
 
 class NodeType(enum.Enum):
     BTS = "BTS"
@@ -31,7 +32,7 @@ class Severity(enum.Enum):
     CRITICAL = "CRITICAL"
 
 class NetworkNode(Base):
-    __tablename__ = "network_nodes"
+    __tablename__ = "network_node"
     
     node_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     node_name = Column(String, nullable=False)
