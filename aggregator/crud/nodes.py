@@ -18,6 +18,10 @@ def create_network_node(db: Session, node: schemas.NetworkNodeCreate):
     db.add(db_node)
     db.commit()
     db.refresh(db_node)
+
+    db_node.latitude = node.latitude
+    db_node.longitude = node.longitude
+
     return db_node
 
 def get_nodes(db: Session, skip: int = 0, limit: int = 100):

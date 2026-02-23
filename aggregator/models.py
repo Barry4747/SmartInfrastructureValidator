@@ -6,6 +6,8 @@ from sqlalchemy.orm import declarative_base, relationship
 from geoalchemy2 import Geometry
 import enum
 from database import Base
+from sqlalchemy.ext.hybrid import hybrid_property
+from geoalchemy2.functions import ST_X, ST_Y
 
 class NodeType(enum.Enum):
     BTS = "BTS"
@@ -47,6 +49,58 @@ class NetworkNode(Base):
     logs = relationship("NodeStatusLog", back_populates="node")
     components = relationship("HardwareComponent", back_populates="node")
     alarms = relationship("ActiveAlarm", back_populates="node")
+
+    @hybrid_property
+    def longitude(self):
+        if hasattr(self, '_longitude'):
+            return self._longitude
+        if self.location is not None and hasattr(self.location, 'desc'):
+            try:
+                import struct
+                wkb = bytes.fromhex(self.location.desc)
+                endian = '<' if wkb[0] == 1 else '>'
+                type_val = struct.unpack(f'{endian}I', wkb[1:5])[0]
+                if type_val & 0x20000000:
+                    return struct.unpack(f'{endian}dd', wkb[9:25])[0]
+                else:
+                    return struct.unpack(f'{endian}dd', wkb[5:21])[0]
+            except Exception:
+                pass
+        return 0.0
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
+
+    @longitude.expression
+    def longitude(cls):
+        return ST_X(cls.location)
+
+    @hybrid_property
+    def latitude(self):
+        if hasattr(self, '_latitude'):
+            return self._latitude
+        if self.location is not None and hasattr(self.location, 'desc'):
+            try:
+                import struct
+                wkb = bytes.fromhex(self.location.desc)
+                endian = '<' if wkb[0] == 1 else '>'
+                type_val = struct.unpack(f'{endian}I', wkb[1:5])[0]
+                if type_val & 0x20000000:
+                    return struct.unpack(f'{endian}dd', wkb[9:25])[1]
+                else:
+                    return struct.unpack(f'{endian}dd', wkb[5:21])[1]
+            except Exception:
+                pass
+        return 0.0
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+
+    @latitude.expression
+    def latitude(cls):
+        return ST_Y(cls.location)
 
 class NodeStatusLog(Base):
     __tablename__ = "node_status_log"
