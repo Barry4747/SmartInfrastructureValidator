@@ -4,10 +4,25 @@ from uuid import UUID
 from database import get_db
 import schemas
 from crud import logs as crud_logs
-
+from ws_manager import manager
+    
 router = APIRouter(prefix="/api/nodes", tags=["Telemetry & Logs"])
 
 @router.post("/{node_id}/logs", response_model=schemas.NodeStatusLogResponse, status_code=201)
-def report_node_status(node_id: UUID, log: schemas.NodeStatusLogCreate, db: Session = Depends(get_db)):
+async def report_node_status(node_id: UUID, log: schemas.NodeStatusLogCreate, db: Session = Depends(get_db)):
     """Reports new node status."""
-    return crud_logs.create_node_log(db=db, node_id=node_id, log=log)
+    created_log = crud_logs.create_node_log(db=db, node_id=node_id, log=log)
+    
+    await manager.broadcast_json({
+        "type": "new_log",
+        "node_id": str(node_id),
+        "log": {
+            "is_online": log.is_online,
+            "cpu_temperature_c": log.cpu_temperature_c,
+            "connected_users": log.connected_users,
+            "current_throughput_mbps": log.current_throughput_mbps,
+            "timestamp": created_log.timestamp.isoformat() if hasattr(created_log, "timestamp") else None
+        }
+    })
+    
+    return created_log
