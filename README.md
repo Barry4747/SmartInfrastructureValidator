@@ -28,7 +28,7 @@ The entire project is containerized using Docker Compose. Ensure you have Docker
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Barry4747/SmartInfrastructureValidator
    cd SmartInfrastructureValidator
    ```
 
