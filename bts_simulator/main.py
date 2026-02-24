@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from config import settings
@@ -42,7 +43,6 @@ async def lifespan(app: FastAPI):
     task.cancel()
     await aggregator_client.close()
 
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="BTS Simulator API", lifespan=lifespan)
 

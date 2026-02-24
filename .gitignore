@@ -1,3 +1,19 @@
-venv
+# Environments
 .env
-__pycache__
+venv/
+env/
+.venv/
+
+# Caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+
+# IDEs
+.vscode/
+.idea/
+
+# Docker
+.dockerignore

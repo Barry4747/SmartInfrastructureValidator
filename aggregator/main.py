@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -5,7 +6,6 @@ from contextlib import asynccontextmanager
 from database import init_db
 from routers import nodes, logs
 from ws_manager import manager
-import os
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

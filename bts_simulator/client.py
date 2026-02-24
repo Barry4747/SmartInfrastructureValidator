@@ -1,3 +1,4 @@
+import asyncio
 import httpx
 import logging
 from config import settings
@@ -13,8 +14,6 @@ class AggregatorClient:
         self.client = httpx.AsyncClient(base_url=self.base_url)
 
     async def register(self, payload: NetworkNodeRegistration):
-        import asyncio
-        import httpx
         max_retries = 10
         retry_delay = 3
         
