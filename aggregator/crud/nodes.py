@@ -26,3 +26,16 @@ def create_network_node(db: Session, node: schemas.NetworkNodeCreate):
 
 def get_nodes(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.NetworkNode).offset(skip).limit(limit).all()
+
+def delete_all_nodes(db: Session):
+    try:
+        db.query(models.NodeStatusLog).delete()
+        db.query(models.ActiveAlarm).delete()
+        db.query(models.HardwareComponent).delete()
+        
+        nodes_deleted = db.query(models.NetworkNode).delete()
+        db.commit()
+        return nodes_deleted
+    except Exception as e:
+        db.rollback()
+        raise e

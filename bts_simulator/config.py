@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     latitude: float = Field(default=51.107883)
     longitude: float = Field(default=17.038538)
     topology_path: str = Field(default="PL.WRO.SIM.gNodeB_01")
+    fault_port: int = Field(default=8001)
     
     heartbeat_interval_sec: int = Field(default=5)
 

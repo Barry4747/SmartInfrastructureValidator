@@ -15,38 +15,16 @@
 <body>
     <div class="app-container">
         
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="logo">
-                <i class="fa-solid fa-satellite-dish"></i>
-                <h2>SIV <span>Dashboard</span></h2>
-            </div>
-            
-            <nav class="nav-menu">
-                <a href="#" class="nav-item active"><i class="fa-solid fa-map-location-dot"></i> Live Map</a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-network-wired"></i> Nodes</a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Alarms</a>
-            </nav>
-            
-            <div class="system-status">
-                <span class="pulse-dot"></span>
-                <p>System Online</p>
-            </div>
-        </aside>
-
         <!-- Main Content Area -->
         <main class="main-content">
             <header class="topbar">
-                <div class="search-bar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search for nodes, alarms...">
+                <div class="logo">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <h2>SIV <span>Dashboard</span></h2>
                 </div>
-                <div class="user-profile">
-                    <div class="notification-bell">
-                        <i class="fa-regular fa-bell"></i>
-                        <span class="badge">3</span>
-                    </div>
+                <div class="system-status">
+                    <span class="pulse-dot"></span>
+                    <p>System Online</p>
                 </div>
             </header>
             
@@ -55,9 +33,12 @@
                 <div class="section-header">
                     <h2>Live Infrastructure <span class="highlight">Telemetry</span></h2>
                     <div class="stats">
-                        <div class="stat-card">
-                            <span class="label">Total Nodes</span>
-                            <span class="value" id="total-nodes">0</span>
+                        <div class="stat-card" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="label">Total Nodes</span>
+                                <span class="value" id="total-nodes">0</span>
+                            </div>
+                            <button id="btn-clear-nodes" class="btn-danger"><i class="fa-solid fa-trash"></i> Clear All</button>
                         </div>
                         <div class="stat-card active-stat">
                             <span class="label">Active Logs/s</span>
@@ -75,6 +56,6 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="app.js?v=2"></script>
+    <script src="app.js?v=4"></script>
 </body>
 </html>

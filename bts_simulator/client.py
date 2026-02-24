@@ -13,18 +13,29 @@ class AggregatorClient:
         self.client = httpx.AsyncClient(base_url=self.base_url)
 
     async def register(self, payload: NetworkNodeRegistration):
-        try:
-            logger.info(f"Registration in Aggregator: {self.base_url}")
-            response = await self.client.post("/api/nodes/", json=payload.model_dump())
-            response.raise_for_status()
-            
-            data = response.json()
-            self.node_id = data["node_id"]
-            logger.info(f"Successfully registered! Received ID: {self.node_id}")
-            return self.node_id
-        except Exception as e:
-            logger.error(f"Error registering in Aggregator: {e}")
-            return None
+        import asyncio
+        import httpx
+        max_retries = 10
+        retry_delay = 3
+        
+        for attempt in range(max_retries):
+            try:
+                logger.info(f"Registration in Aggregator (attempt {attempt+1}/{max_retries}): {self.base_url}")
+                response = await self.client.post("/api/nodes/", json=payload.model_dump())
+                response.raise_for_status()
+                
+                data = response.json()
+                self.node_id = data["node_id"]
+                logger.info(f"Successfully registered! Received ID: {self.node_id}")
+                return self.node_id
+            except (httpx.ConnectError, httpx.HTTPStatusError, Exception) as e:
+                logger.warning(f"Error registering in Aggregator: {e}")
+                if attempt < max_retries - 1:
+                    logger.info(f"Retrying in {retry_delay} seconds...")
+                    await asyncio.sleep(retry_delay)
+                else:
+                    logger.error("Max retries reached. Could not register.")
+                    return None
 
     async def send_telemetry(self, payload: NodeTelemetryPayload):
         if not self.node_id:

@@ -54,6 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const marker = L.marker([lat, lon], { icon: icon }).addTo(map);
 
+                    const faultPort = node.vendor_config?.fault_port;
+
+                    let actionsHTML = '';
+                    if (faultPort) {
+                        actionsHTML = `
+                            <div class="popup-actions" style="margin-top: 15px; display: flex; gap: 8px;">
+                                <button onclick="injectFault(${faultPort})" class="btn-danger">Inject Fault</button>
+                                <button onclick="fixFault(${faultPort})" class="btn-success">Fix Node</button>
+                            </div>
+                        `;
+                    }
+
                     const popupHTML = `
                         <div class="popup-title">${node.node_name}</div>
                         <div class="popup-data">
@@ -61,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="data-label">IP:</span><span class="data-val">${node.ip_address}</span>
                             <span class="data-label">Max Speed:</span><span class="data-val">${node.max_throughput_mbps} Mbps</span>
                         </div>
+                        ${actionsHTML}
                     `;
                     marker.bindPopup(popupHTML);
 
@@ -227,7 +240,71 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 6. Handle Clear Nodes Button
+    const btnClearNodes = document.getElementById('btn-clear-nodes');
+    if (btnClearNodes) {
+        btnClearNodes.addEventListener('click', async () => {
+            if (confirm("Are you sure you want to delete all nodes? This will also delete all their logs and alarms.")) {
+                try {
+                    const response = await fetch('/api/nodes/', { method: 'DELETE' });
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert(result.message);
+
+                        // Clear markers from map
+                        for (const nodeId in markers) {
+                            map.removeLayer(markers[nodeId]);
+                        }
+
+                        // Reset state
+                        for (const prop of Object.getOwnPropertyNames(markers)) {
+                            delete markers[prop];
+                        }
+                        totalNodesEl.innerText = '0';
+                    } else {
+                        alert("Failed to delete nodes.");
+                    }
+                } catch (error) {
+                    console.error("Error deleting nodes:", error);
+                    alert("Error deleting nodes.");
+                }
+            }
+        });
+    }
+
     // Launch!
     fetchNodes();
     connectWS();
 });
+
+// Expose fault handlers to global scope for inline onclick handlers
+window.injectFault = async function (port) {
+    try {
+        const res = await fetch(`http://localhost:${port}/api/fault/cooling`, { method: 'POST' });
+        const data = await res.json();
+        if (res.ok) {
+            alert(`Fault injected successfully: ${data.message}`);
+        } else {
+            alert(`Failed to inject fault: ${res.statusText}`);
+        }
+    } catch (err) {
+        console.error("Error injecting fault:", err);
+        alert("Network error while injecting fault. Is the port mapped correctly?");
+    }
+};
+
+window.fixFault = async function (port) {
+    try {
+        const res = await fetch(`http://localhost:${port}/api/fault/fix`, { method: 'POST' });
+        const data = await res.json();
+        if (res.ok) {
+            alert(`Node fixed successfully: ${data.message}`);
+        } else {
+            alert(`Failed to fix node: ${res.statusText}`);
+        }
+    } catch (err) {
+        console.error("Error fixing node:", err);
+        alert("Network error while fixing node. Is the port mapped correctly?");
+    }
+};

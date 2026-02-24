@@ -29,7 +29,8 @@ async def lifespan(app: FastAPI):
         ip_address=settings.ip_address,
         max_throughput_mbps=settings.max_throughput,
         latitude=settings.latitude,
-        longitude=settings.longitude
+        longitude=settings.longitude,
+        vendor_config={"fault_port": settings.fault_port}
     )
     
     await aggregator_client.register(registration_data)
@@ -41,7 +42,17 @@ async def lifespan(app: FastAPI):
     task.cancel()
     await aggregator_client.close()
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="BTS Simulator API", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/api/fault/cooling")
 async def inject_cooling_fault():

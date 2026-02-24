@@ -31,6 +31,65 @@ services:
     networks:
       - telco_network
 
+  sim_wroclaw:
+    build:
+      context: ./bts_simulator
+      dockerfile: Dockerfile
+    container_name: sim_wroclaw_gNodeB
+    ports:
+      - "8001:8001"
+    environment:
+      - SIMULATOR_NAME=WRO_5G_01
+      - NODE_TYPE=gNodeB
+      - LATITUDE=51.107883
+      - LONGITUDE=17.038538
+      - MAX_THROUGHPUT=10000
+      - AGGREGATOR_URL=http://network_aggregator:8000
+    depends_on:
+      - aggregator
+    networks:
+      - telco_network
+
+  sim_krakow:
+    build:
+      context: ./bts_simulator
+      dockerfile: Dockerfile
+    container_name: sim_krakow_eNodeB
+    ports:
+      - "8002:8001"
+    environment:
+      - SIMULATOR_NAME=KRK_4G_01
+      - NODE_TYPE=eNodeB
+      - LATITUDE=50.064650
+      - LONGITUDE=19.944980
+      - MAX_THROUGHPUT=1000
+      - AGGREGATOR_URL=http://network_aggregator:8000
+      - FAULT_PORT=8002
+    depends_on:
+      - aggregator
+    networks:
+      - telco_network
+
+  sim_gdansk:
+    build:
+      context: ./bts_simulator
+      dockerfile: Dockerfile
+    container_name: sim_gdansk_gNodeB
+    ports:
+      - "8003:8001"
+    environment:
+      - SIMULATOR_NAME=GDN_5G_01
+      - NODE_TYPE=gNodeB
+      - LATITUDE=54.352024
+      - LONGITUDE=18.646638
+      - MAX_THROUGHPUT=10000
+      - AGGREGATOR_URL=http://network_aggregator:8000
+      - FAULT_PORT=8003
+    depends_on:
+      - aggregator
+    networks:
+      - telco_network
+
 volumes:
   postgres_data:
 
