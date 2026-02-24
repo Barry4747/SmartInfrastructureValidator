@@ -33,9 +33,6 @@ app.add_middleware(
 app.include_router(nodes.router)
 app.include_router(logs.router)
 
-os.makedirs("static", exist_ok=True)
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
-
 @app.websocket("/ws/events")
 async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
@@ -44,6 +41,9 @@ async def websocket_endpoint(websocket: WebSocket):
             data = await websocket.receive_text()
     except WebSocketDisconnect:
         manager.disconnect(websocket)
+
+os.makedirs("static", exist_ok=True)
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 @app.get("/health")
 def health_check():
