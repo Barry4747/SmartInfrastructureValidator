@@ -106,7 +106,7 @@ Each simulator:
 
 ## 🗃️ Database Schema (ERD)
 
-> Source: [`docs/SmartInfrastructureValidator_ERD.svg`](docs/SmartInfrastructureValidator_ERD.svg)
+![Entity Relationship Diagram](docs/SmartInfrastructureValidator_ERD.svg)
 
 ```
 network_node (UUID PK)
