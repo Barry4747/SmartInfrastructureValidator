@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="604px" preserveAspectRatio="none" style="width:925px;height:604px;" version="1.1" viewBox="0 0 925 604" width="925px" zoomAndPan="magnify"><defs><filter height="300%" id="ftdsqzcrh8kq4" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[f5b380c29721e91229950def7a02231a]
+class network_node--><rect codeLine="6" fill="#FEFECE" filter="url(#ftdsqzcrh8kq4)" height="165.6172" id="network_node" style="stroke:#A80036;stroke-width:1.5;" width="407" x="404" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="568.5" y="24.457">network_node</text><line style="stroke:#A80036;stroke-width:1.5;" x1="405" x2="810" y1="32.0938" y2="32.0938"/><ellipse cx="415" cy="43.0938" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="98" x="424" y="47.5127">node_id : UUID «PK»</text><line style="stroke:#A80036;stroke-width:1.0;" x1="405" x2="810" y1="53.9297" y2="53.9297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="410" y="69.3486">node_name : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="395" x="410" y="83.1846">topology_path : Ltree «Network topology path (e.g. PL.WRO.SITE_A.gNodeB_01)»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="309" x="410" y="97.0205">node_type : Enum «BTS, NodeB, eNodeB, gNodeB, ng_eNodeB»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="91" x="410" y="110.8564">ip_address : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="152" x="410" y="124.6924">max_throughput_mbps : Integer</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="354" x="410" y="138.5283">location : Geometry «PostGIS Point (replaces separate latitude/longitude)»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="358" x="410" y="152.3643">vendor_config : JSONB «Hardware-specific configuration per generation»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="112" x="410" y="166.2002">created_at : Timestamp</text><!--MD5=[72bc39584b9b3ce75273f9af26b25ae1]
+class node_status_log--><rect codeLine="19" fill="#FEFECE" filter="url(#ftdsqzcrh8kq4)" height="124.1094" id="node_status_log" style="stroke:#A80036;stroke-width:1.5;" width="347" x="7" y="251"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="93" x="134" y="268.457">node_status_log</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="353" y1="276.0938" y2="276.0938"/><ellipse cx="18" cy="287.0938" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="321" x="27" y="291.5127">timestamp : Timestamp «PK» «Measurement time (partitioning key)»</text><ellipse cx="18" cy="300.9297" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="273" x="27" y="305.3486">node_id : UUID «PK, FK» «Foreign key to network_node»</text><line style="stroke:#A80036;stroke-width:1.0;" x1="8" x2="353" y1="311.7656" y2="311.7656"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="13" y="327.1846">is_online : Boolean</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="126" x="13" y="341.0205">cpu_temperature_c : Float</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="127" x="13" y="354.8564">connected_users : Integer</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="157" x="13" y="368.6924">current_throughput_mbps : Float</text><!--MD5=[f9481d436846227710f27f0a92911f1f]
+class hardware_component--><rect codeLine="29" fill="#FEFECE" filter="url(#ftdsqzcrh8kq4)" height="96.4375" id="hardware_component" style="stroke:#A80036;stroke-width:1.5;" width="436" x="389.5" y="265"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="121" x="547" y="282.457">hardware_component</text><line style="stroke:#A80036;stroke-width:1.5;" x1="390.5" x2="824.5" y1="290.0938" y2="290.0938"/><ellipse cx="400.5" cy="301.0938" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="127" x="409.5" y="305.5127">component_id : UUID «PK»</text><line style="stroke:#A80036;stroke-width:1.0;" x1="390.5" x2="824.5" y1="311.9297" y2="311.9297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="98" x="395.5" y="327.3486">node_id : UUID «FK»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="424" x="395.5" y="341.1846">component_type : Enum «ANTENNA, TRANSCEIVER, COOLING_FAN, POWER_SUPPLY»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="198" x="395.5" y="355.0205">status : Enum «OK, DEGRADED, FAILED»</text><!--MD5=[690a739652b5fa5a24366d421b5d81cb]
+class active_alarm--><rect codeLine="37" fill="#FEFECE" filter="url(#ftdsqzcrh8kq4)" height="137.9453" id="active_alarm" style="stroke:#A80036;stroke-width:1.5;" width="281" x="611" y="453"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="70" x="716.5" y="470.457">active_alarm</text><line style="stroke:#A80036;stroke-width:1.5;" x1="612" x2="891" y1="478.0938" y2="478.0938"/><ellipse cx="622" cy="489.0938" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="631" y="493.5127">alarm_id : UUID «PK»</text><line style="stroke:#A80036;stroke-width:1.0;" x1="612" x2="891" y1="499.9297" y2="499.9297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="98" x="617" y="515.3486">node_id : UUID «FK»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="179" x="617" y="529.1846">component_id : UUID «FK» «Nullable»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="269" x="617" y="543.0205">severity : Enum «WARNING, MINOR, MAJOR, CRITICAL»</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="617" y="556.8564">description : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="617" y="570.6924">raised_at : Timestamp</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="163" x="617" y="584.5283">cleared_at : Timestamp «Nullable»</text><!--MD5=[3744a951079854b0d0f50bb4097d6f93]
+link network_node to node_status_log--><path codeLine="49" d="M539.67,181.02 C539.67,181.02 539.67,258 539.67,258 C539.67,258 362.03,258 362.03,258 " fill="none" id="network_node-node_status_log" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="362.03" x2="354.03" y1="258" y2="264"/><line style="stroke:#A80036;stroke-width:1.0;" x1="362.03" x2="354.03" y1="258" y2="252"/><line style="stroke:#A80036;stroke-width:1.0;" x1="362.03" x2="354.03" y1="258" y2="258"/><ellipse cx="368.03" cy="258" fill="none" rx="4" ry="4" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="535.67" x2="543.67" y1="177.02" y2="177.02"/><line style="stroke:#A80036;stroke-width:1.0;" x1="535.67" x2="543.67" y1="180.02" y2="180.02"/><line style="stroke:#A80036;stroke-width:1.0;" x1="539.67" x2="539.67" y1="181.02" y2="173.02"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="212" x="181.5" y="217.4951">generates (TimescaleDB Hypertable)</text><!--MD5=[ef5110e9ca62a2f861bd8d8da0088408]
+link network_node to hardware_component--><path codeLine="50" d="M675.33,181.04 C675.33,181.04 675.33,256.88 675.33,256.88 " fill="none" id="network_node-hardware_component" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="675.33" x2="681.33" y1="256.88" y2="264.88"/><line style="stroke:#A80036;stroke-width:1.0;" x1="675.33" x2="669.33" y1="256.88" y2="264.88"/><line style="stroke:#A80036;stroke-width:1.0;" x1="675.33" x2="675.33" y1="256.88" y2="264.88"/><line style="stroke:#A80036;stroke-width:1.0;" x1="679.33" x2="671.33" y1="254.88" y2="254.88"/><line style="stroke:#A80036;stroke-width:1.0;" x1="671.33" x2="679.33" y1="177.04" y2="177.04"/><line style="stroke:#A80036;stroke-width:1.0;" x1="671.33" x2="679.33" y1="180.04" y2="180.04"/><line style="stroke:#A80036;stroke-width:1.0;" x1="675.33" x2="675.33" y1="181.04" y2="173.04"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="608.5" y="217.4951">contains</text><!--MD5=[c589b0a2d16842e629235d2dc17fa31e]
+link network_node to active_alarm--><path codeLine="51" d="M819.2,90 C819.2,90 858.75,90 858.75,90 C858.75,90 858.75,444.59 858.75,444.59 " fill="none" id="network_node-active_alarm" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="858.75" x2="864.75" y1="444.59" y2="452.59"/><line style="stroke:#A80036;stroke-width:1.0;" x1="858.75" x2="852.75" y1="444.59" y2="452.59"/><line style="stroke:#A80036;stroke-width:1.0;" x1="858.75" x2="858.75" y1="444.59" y2="452.59"/><ellipse cx="858.75" cy="438.59" fill="none" rx="4" ry="4" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="815.2" x2="815.2" y1="94" y2="86"/><line style="stroke:#A80036;stroke-width:1.0;" x1="818.2" x2="818.2" y1="94" y2="86"/><line style="stroke:#A80036;stroke-width:1.0;" x1="819.2" x2="811.2" y1="90" y2="90"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="896.5" y="318.4951">has</text><!--MD5=[6740e1d91260ad3003340c0ac2e351ae]
+link hardware_component to active_alarm--><path codeLine="52" d="M718.25,369.21 C718.25,369.21 718.25,444.64 718.25,444.64 " fill="none" id="hardware_component-active_alarm" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="718.25" x2="724.25" y1="444.64" y2="452.64"/><line style="stroke:#A80036;stroke-width:1.0;" x1="718.25" x2="712.25" y1="444.64" y2="452.64"/><line style="stroke:#A80036;stroke-width:1.0;" x1="718.25" x2="718.25" y1="444.64" y2="452.64"/><ellipse cx="718.25" cy="438.64" fill="none" rx="4" ry="4" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="714.25" x2="722.25" y1="365.21" y2="365.21"/><line style="stroke:#A80036;stroke-width:1.0;" x1="714.25" x2="722.25" y1="368.21" y2="368.21"/><line style="stroke:#A80036;stroke-width:1.0;" x1="718.25" x2="718.25" y1="369.21" y2="361.21"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="42" x="719.5" y="419.4951">causes</text><!--MD5=[4e1dbe41be8dc2e60ca0e489d001770d]
+@startuml SmartInfrastructureValidator_ERD
+' Hide class icons and use orthogonal line routing
+hide circle
+skinparam linetype ortho
+
+' Entity definitions
+entity "network_node" as network_node {
+  * node_id : UUID <<PK>>
+  - -
+  node_name : String
+  topology_path : Ltree <<Network topology path (e.g. PL.WRO.SITE_A.gNodeB_01)>>
+  node_type : Enum <<BTS, NodeB, eNodeB, gNodeB, ng_eNodeB>>
+  ip_address : String
+  max_throughput_mbps : Integer
+  location : Geometry <<PostGIS Point (replaces separate latitude/longitude)>>
+  vendor_config : JSONB <<Hardware-specific configuration per generation>>
+  created_at : Timestamp
+}
+
+entity "node_status_log" as node_status_log {
+  * timestamp : Timestamp <<PK>> <<Measurement time (partitioning key)>>
+  * node_id : UUID <<PK, FK>> <<Foreign key to network_node>>
+  - -
+  is_online : Boolean
+  cpu_temperature_c : Float
+  connected_users : Integer
+  current_throughput_mbps : Float
+}
+
+entity "hardware_component" as hardware_component {
+  * component_id : UUID <<PK>>
+  - -
+  node_id : UUID <<FK>>
+  component_type : Enum <<ANTENNA, TRANSCEIVER, COOLING_FAN, POWER_SUPPLY>>
+  status : Enum <<OK, DEGRADED, FAILED>>
+}
+
+entity "active_alarm" as active_alarm {
+  * alarm_id : UUID <<PK>>
+  - -
+  node_id : UUID <<FK>>
+  component_id : UUID <<FK>> <<Nullable>>
+  severity : Enum <<WARNING, MINOR, MAJOR, CRITICAL>>
+  description : String
+  raised_at : Timestamp
+  cleared_at : Timestamp <<Nullable>>
+}
+
+' Relationships
+network_node ||- -o{ node_status_log : "generates (TimescaleDB Hypertable)"
+network_node ||- -|{ hardware_component : "contains"
+network_node ||- -o{ active_alarm : "has"
+hardware_component ||- -o{ active_alarm : "causes"
+
+@enduml
+
+@startuml SmartInfrastructureValidator_ERD
+hide circle
+skinparam linetype ortho
+
+entity "network_node" as network_node {
+  * node_id : UUID <<PK>>
+  - -
+  node_name : String
+  topology_path : Ltree <<Network topology path (e.g. PL.WRO.SITE_A.gNodeB_01)>>
+  node_type : Enum <<BTS, NodeB, eNodeB, gNodeB, ng_eNodeB>>
+  ip_address : String
+  max_throughput_mbps : Integer
+  location : Geometry <<PostGIS Point (replaces separate latitude/longitude)>>
+  vendor_config : JSONB <<Hardware-specific configuration per generation>>
+  created_at : Timestamp
+}
+
+entity "node_status_log" as node_status_log {
+  * timestamp : Timestamp <<PK>> <<Measurement time (partitioning key)>>
+  * node_id : UUID <<PK, FK>> <<Foreign key to network_node>>
+  - -
+  is_online : Boolean
+  cpu_temperature_c : Float
+  connected_users : Integer
+  current_throughput_mbps : Float
+}
+
+entity "hardware_component" as hardware_component {
+  * component_id : UUID <<PK>>
+  - -
+  node_id : UUID <<FK>>
+  component_type : Enum <<ANTENNA, TRANSCEIVER, COOLING_FAN, POWER_SUPPLY>>
+  status : Enum <<OK, DEGRADED, FAILED>>
+}
+
+entity "active_alarm" as active_alarm {
+  * alarm_id : UUID <<PK>>
+  - -
+  node_id : UUID <<FK>>
+  component_id : UUID <<FK>> <<Nullable>>
+  severity : Enum <<WARNING, MINOR, MAJOR, CRITICAL>>
+  description : String
+  raised_at : Timestamp
+  cleared_at : Timestamp <<Nullable>>
+}
+
+network_node ||- -o{ node_status_log : "generates (TimescaleDB Hypertable)"
+network_node ||- -|{ hardware_component : "contains"
+network_node ||- -o{ active_alarm : "has"
+hardware_component ||- -o{ active_alarm : "causes"
+
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 11:25:05 CET 2021)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1250
+Language: pl
+Country: PL
+--></g></svg>
