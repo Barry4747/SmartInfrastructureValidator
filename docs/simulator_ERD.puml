@@ -1,25 +1,25 @@
-@startuml
-' Ustawienia wizualne ukrywające ikony klas i prostujące linie relacji
+@startuml SmartInfrastructureValidator_ERD
+' Hide class icons and use orthogonal line routing
 hide circle
 skinparam linetype ortho
 
-' Definicje encji i atrybutów
+' Entity definitions
 entity "network_node" as network_node {
   * node_id : UUID <<PK>>
   --
   node_name : String
-  topology_path : Ltree <<Ścieżka w topologii sieci (np. PL.WRO.SITE_A.gNodeB_01)>>
+  topology_path : Ltree <<Network topology path (e.g. PL.WRO.SITE_A.gNodeB_01)>>
   node_type : Enum <<BTS, NodeB, eNodeB, gNodeB, ng_eNodeB>>
   ip_address : String
   max_throughput_mbps : Integer
-  location : Geometry <<PostGIS Point (zamiast latitude/longitude)>>
-  vendor_config : JSONB <<Specyficzna konfiguracja sprzętowa per generacja>>
+  location : Geometry <<PostGIS Point (replaces separate latitude/longitude)>>
+  vendor_config : JSONB <<Hardware-specific configuration per generation>>
   created_at : Timestamp
 }
 
 entity "node_status_log" as node_status_log {
-  * timestamp : Timestamp <<PK>> <<Czas pomiaru (Klucz partycjonowania)>>
-  * node_id : UUID <<PK, FK>> <<Klucz obcy do network_node>>
+  * timestamp : Timestamp <<PK>> <<Measurement time (partitioning key)>>
+  * node_id : UUID <<PK, FK>> <<Foreign key to network_node>>
   --
   is_online : Boolean
   cpu_temperature_c : Float
@@ -46,10 +46,10 @@ entity "active_alarm" as active_alarm {
   cleared_at : Timestamp <<Nullable>>
 }
 
-' Relacje
-network_node ||--o{ node_status_log : "generuje (TimescaleDB Hypertable)"
-network_node ||--|{ hardware_component : "zawiera (contains)"
-network_node ||--o{ active_alarm : "posiada (has)"
-hardware_component ||--o{ active_alarm : "powoduje (causes)"
+' Relationships
+network_node ||--o{ node_status_log : "generates (TimescaleDB Hypertable)"
+network_node ||--|{ hardware_component : "contains"
+network_node ||--o{ active_alarm : "has"
+hardware_component ||--o{ active_alarm : "causes"
 
 @enduml

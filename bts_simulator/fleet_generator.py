@@ -48,9 +48,9 @@ async def simulate_node(node: VirtualNode, client: httpx.AsyncClient):
         response = await client.post("/api/nodes/", json=reg_data.model_dump())
         if response.status_code == 201:
             node.node_id = response.json()["node_id"]
-            logging.info(f"[+] Zarejestrowano {node.name} ({node.type.value})")
+            logging.info(f"[+] Registered {node.name} ({node.type.value})")
     except Exception as e:
-        logging.error(f"[-] Błąd rejestracji {node.name}: {e}")
+        logging.error(f"[-] Registration error for {node.name}: {e}")
         return
 
     while True:
@@ -60,12 +60,12 @@ async def simulate_node(node: VirtualNode, client: httpx.AsyncClient):
             metrics = node.generate_metrics()
             try:
                 await client.post(f"/api/nodes/{node.node_id}/logs", json=metrics.model_dump())
-                logging.debug(f"[{node.name}] Wysłano logi.")
+                logging.debug(f"[{node.name}] Telemetry logs sent.")
             except Exception:
                 pass
 
 async def main():
-    logging.info(f"Startowanie generatora obciążenia dla {NUM_STATIONS} stacji bazowych...")
+    logging.info(f"Starting load generator for {NUM_STATIONS} base stations...")
     
     nodes = [VirtualNode(i) for i in range(1, NUM_STATIONS + 1)]
     

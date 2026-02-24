@@ -17,7 +17,7 @@ class NodeType(enum.Enum):
     ng_eNodeB = "ng_eNodeB"
 
 class ComponentType(enum.Enum):
-    ANTENA = "ANTENA"
+    ANTENNA = "ANTENNA"
     TRANSCEIVER = "TRANSCEIVER"
     COOLING_FAN = "COOLING_FAN"
     POWER_SUPPLY = "POWER_SUPPLY"
@@ -38,12 +38,12 @@ class NetworkNode(Base):
     
     node_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     node_name = Column(String, nullable=False)
-    topology_path = Column(String, nullable=False)  
+    topology_path = Column(String, nullable=False)
     node_type = Column(SQLEnum(NodeType), nullable=False)
     ip_address = Column(String, nullable=False)
     max_throughput_mbps = Column(Integer, nullable=False)
-    location = Column(Geometry('POINT'), nullable=False) 
-    vendor_config = Column(JSONB, default={})            
+    location = Column(Geometry('POINT'), nullable=False)
+    vendor_config = Column(JSONB, default={})
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     logs = relationship("NodeStatusLog", back_populates="node")
